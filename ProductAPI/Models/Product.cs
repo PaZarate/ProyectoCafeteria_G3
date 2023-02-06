@@ -14,7 +14,7 @@ namespace ProductAPI.Models
        public string ProductName { get; set; }
 
        [Column("product_code")]
-       public String ProductCode { get; set; }
+       public string ProductCode { get; set; }
 
        [Column("product_price")]
        public decimal ProductPrice { get; set; }

@@ -17,7 +17,7 @@ namespace ProductAPI
                 if(databaseCreator != null)
                 {
                     //Creacion de la BD (Excepciones)
-                    if(!databaseCreator.CanConnect()) databaseCreator.CanConnect();
+                    if(!databaseCreator.CanConnect()) databaseCreator.Create();
 
                     //Creacion de las tablas en caso no existiera
                     if(!databaseCreator.HasTables()) databaseCreator.CreateTables();
