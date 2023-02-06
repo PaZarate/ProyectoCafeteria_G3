@@ -1,14 +1,14 @@
-﻿using Swashbuckle.AspNetCore.SwaggerGen;
-using System.ComponentModel.DataAnnotations;
+
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace CostumerAPI.Models
 {
-    [Table("costumer", Schema = "dbo")]
+    //[Table("costumer", Schema = "dbo")]
     public class Costumer
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("costumer_id")]
         public int CostumerId { get; set; }
 
