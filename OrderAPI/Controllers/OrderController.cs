@@ -14,7 +14,7 @@ namespace OrderAPI.Controllers
         {
             var dbHost = "localHost";
             var dbName = "dms_order";
-            var connectionString = $"mongodb://{dbHost}:5160/{dbName}";
+            var connectionString = $"mongodb://{dbHost}:5123/{dbName}";
 
             var mongoUrl = MongoUrl.Create(connectionString);
             var mongoClient = new MongoClient(mongoUrl);
