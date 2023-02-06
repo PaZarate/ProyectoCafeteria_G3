@@ -11,8 +11,8 @@ builder.Services.AddControllers();
 
 var dbHost = "localhost";
 var dbName = "dms_costumer";
-var dbPassword = "123456";
-var connectionString = $"Data Source = {dbHost};Initial Catalog={dbName};User ID=sa; Password={dbPassword}";
+var dbPassword = "";
+var connectionString = $"Data Source = {dbHost};Initial Catalog={dbName};User ID=HANKO-PC; Password={dbPassword}";
 builder.Services.AddDbContext<CostumerDbContext>(opt => opt.UseSqlServer(connectionString));
 
 /* ================================================= */

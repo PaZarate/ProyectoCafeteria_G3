@@ -37,11 +37,19 @@ namespace CostumerAPI.Controllers
         }
 
         [HttpPut]
+        public async Task<ActionResult> Update(Costumer costumer)
+        {
+            _costumerDbContext.Costumers.Update(costumer);
+            await _costumerDbContext.SaveChangesAsync(true);
+            return Ok();
+        }
+
+        [HttpDelete("{costumerId:Int}")]
         public async Task<ActionResult> Delete(int costumerId)
         {
             var costumer = await _costumerDbContext.Costumers.FindAsync(costumerId);
             _costumerDbContext.Costumers.Remove(costumer);
-            await _costumerDbContext.SaveChangesAsync(true);
+            await _costumerDbContext.SaveChangesAsync();
             return Ok();
         }
     }
