@@ -11,9 +11,9 @@ builder.Services.AddControllers();
 
 var dbHost = "localhost";
 var dbName = "dms_product";
-var dbPassword = "P@assw0rd";
+var dbPassword = "";
 
-var connectionString = $"server ={dbHost};port=3306:database={dbName};user=root;password={dbPassword}";
+var connectionString = $"server={dbHost};port=3306;database={dbName};user=root;password={dbPassword}";
 builder.Services.AddDbContext<ProductDbContext>(o => o.UseMySQL(connectionString));
 /* =========================================== */
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
