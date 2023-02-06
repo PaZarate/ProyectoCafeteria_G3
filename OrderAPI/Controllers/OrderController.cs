@@ -10,48 +10,58 @@ namespace OrderAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IMongoCollection<Order> _orderCollection;
-        public OrderController() 
+        public OrderController()
         {
             var dbHost = "localHost";
             var dbName = "dms_order";
             var connectionString = $"mongodb://{dbHost}:5160/{dbName}";
-             
+
             var mongoUrl = MongoUrl.Create(connectionString);
             var mongoClient = new MongoClient(mongoUrl);
             var database = mongoClient.GetDatabase(mongoUrl.DatabaseName);
             _orderCollection = database.GetCollection<Order>("order");
-        
+
         }
         // GET: api/<OrderController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            return new string[] { "value1", "value2" };
+            return await _orderCollection.Find(Builders<Order>.Filter.Empty).ToListAsync();
         }
 
-        // GET api/<OrderController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/<OrderController>
+        [HttpGet("{orderid}")]
+        public async Task<ActionResult<Order>> GetById(string orderId)
         {
-            return "value";
+            var filterDefinition = Builders<Order>.Filter.Eq(x => x.OrderId, orderId);
+            return await _orderCollection.Find(filterDefinition).SingleOrDefaultAsync();
         }
 
         // POST api/<OrderController>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
+        public async Task<ActionResult> Create(Order order)
+        { 
+            await _orderCollection.InsertOneAsync(order);
+            return Ok();
+
         }
 
-        // PUT api/<OrderController>/5
+        // PUT api/<OrderController>
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Update(Order order) 
         {
+            var fiterDefinition = Builders<Order>.Filter.Eq(x => x.OrderId, order.OrderId); 
+            await _orderCollection.ReplaceOneAsync(fiterDefinition, order);
+            return Ok();
         }
 
-        // DELETE api/<OrderController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/<OrderController>
+        [HttpDelete("{orderid}")]
+        public async Task<ActionResult> Delete(string orderId)
         {
+            var fiterDefinition = Builders<Order>.Filter.Eq(x => x.OrderId, orderId);
+            await _orderCollection.DeleteOneAsync(fiterDefinition);
+            return Ok();
         }
     }
 }
