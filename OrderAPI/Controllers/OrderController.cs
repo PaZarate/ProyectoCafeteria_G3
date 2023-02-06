@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using OrderAPI.Models;
 
 namespace OrderAPI.Controllers
 {
@@ -8,6 +9,19 @@ namespace OrderAPI.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly IMongoCollection<Order> _orderCollection;
+        public OrderController() 
+        {
+            var dbHost = "localHost";
+            var dbName = "dms_order";
+            var connectionString = $"mongodb://{dbHost}:5160/{dbName}";
+             
+            var mongoUrl = MongoUrl.Create(connectionString);
+            var mongoClient = new MongoClient(mongoUrl);
+            var database = mongoClient.GetDatabase(mongoUrl.DatabaseName);
+            _orderCollection = database.GetCollection<Order>("order");
+        
+        }
         // GET: api/<OrderController>
         [HttpGet]
         public IEnumerable<string> Get()
