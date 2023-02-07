@@ -12,8 +12,14 @@ namespace CostumerAPI.Models
         [Column("costumer_id")]
         public int CostumerId { get; set; }
 
+        [Column("costumer_dni")]
+        public string CostumerDNI { get; set; }
+
         [Column("costumer_name")]
         public string CostumerName { get; set; }
+
+        [Column("costumer_lastname")]
+        public string CostumerLastName { get; set; }
 
         [Column("mobile_no")]
         public string MobileNumber { get; set; }
