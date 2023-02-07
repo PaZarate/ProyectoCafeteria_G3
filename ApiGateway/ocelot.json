@@ -1,5 +1,6 @@
 {
   "Routes": [
+    //Customer web API
     {
       "UpstreamPathTemplate": "/api/Costumer",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
@@ -11,6 +12,44 @@
         }
       ],
       "DownstreamPathTemplate": "/api/Costumer"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Costumer/{costumerId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Costumer/{costumerId}"
+    },
+
+    //Product web API
+    {
+      "UpstreamPathTemplate": "/api/Product",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cproductwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/{productId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cproductwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/{productId}"
     }
   ],
   "GlobalConfiguration": {
