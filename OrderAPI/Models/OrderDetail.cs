@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace OrderAPI.Models
 {
     [Serializable, BsonIgnoreExtraElements]
-
+    //creacion de clase orderdETAIL
     public class OrderDetail
     {
         [BsonElement("product_id"), BsonRepresentation(BsonType.Int32)]
